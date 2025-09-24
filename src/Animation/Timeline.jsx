@@ -4,7 +4,6 @@ const Timeline = () => {
   const itemsRef = useRef([]);
   const [activeIndex, setActiveIndex] = useState(-1);
 
-  // Your timeline data
   const timelineData = [
     {
       title: "AutoCAD Draftsman",
@@ -58,10 +57,9 @@ const Timeline = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto py-12">
-      <ul className="relative">
+      <ul className="relative max-w-4xl mx-auto py-12">
         {/* central spine */}
-        <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-[#F8898F]/40">
-          {/* animated fill */}
+        <div className="absolute -left-3 md:left-1/2 top-0 h-full w-1 md:-translate-x-1/2 bg-[#F8898F]/40">
           <div
             className="w-1 bg-[#F2676E] transition-all duration-500 ease-out origin-top"
             style={{
@@ -74,32 +72,35 @@ const Timeline = () => {
           <li
             key={i}
             ref={(el) => (itemsRef.current[i] = el)}
-            className="relative flex justify-between items-start mb-16"
+            className="relative flex flex-col md:flex-row justify-between items-start mb-16"
           >
             {/* Left side */}
-            <div className="w-5/12 text-right pr-8">
-              <h3 className="text-lg font-semibold text-white">{item.title}</h3>
-              <p className="text-sm text-gray-300">{item.company}</p>
-              <p className="text-xs text-gray-400">{item.period}</p>
+            <div className="w-full md:w-5/12 ml-4 md:ml-0 md:text-right md:pr-8 mb-4 md:mb-0">
+              <h3 className="text-lg sm:text-xl font-semibold text-white">
+                {item.title}
+              </h3>
+              <p className="text-sm sm:text-base text-gray-300">
+                {item.company}
+              </p>
+              <p className="text-xs sm:text-sm text-gray-400">{item.period}</p>
             </div>
 
             {/* Circle */}
-            <div className="relative z-10 flex items-center justify-center">
+            <div className="absolute md:relative z-10 flex items-center justify-center mb-4 -ml-5.5 md:ml-0 md:mb-0">
               <span
-                className={`w-6 h-6 rounded-full border-4 transition-colors 
-                  ${
-                    i <= activeIndex
-                      ? "border-[#F2676E] bg-white animate-pulse"
-                      : "border-[#F8898F] bg-white/20"
-                  }`}
+                className={`w-6 h-6 rounded-full border-4 transition-colors ${
+                  i <= activeIndex
+                    ? "border-[#F2676E] bg-white animate-pulse"
+                    : "border-[#F8898F] bg-white/20"
+                }`}
               />
             </div>
 
             {/* Right side */}
-            <div className="w-5/12 pl-8">
+            <div className="w-full ml-4 md:ml-0 md:w-5/12  md:text-left">
               <ul className="list-disc text-white/80 leading-relaxed">
                 {item.description.map((desc, idx) => (
-                  <li key={idx} className="mb-2">
+                  <li key={idx} className="mb-2 text-sm sm:text-base">
                     {desc}
                   </li>
                 ))}

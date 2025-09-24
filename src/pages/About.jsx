@@ -1,31 +1,43 @@
 import Timeline from "../Animation/TimeLine";
 import deadpoolsit from "../assets/images/deadpoolsit.png";
+
 const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen z-5 flex items-center px-[100px]"
+      className="relative min-h-screen z-5 flex items-center px-4 sm:px-8 md:px-[100px] py-12"
     >
-      {/* About me */}
-      <div className="w-screen relative overflow-hidden  flex flex-col p-7 items-start justify-center space-y-6 rounded-3xl bg-white/5 border border-[#F8898F] ">
-        <h1 className="text-3xl text-[#F2676E] font-extrabold">About Me</h1>
-        <p className="text-[22px] font-medium">
+      {/* About me container */}
+      <div className="w-full relative overflow-hidden flex flex-col p-6 sm:p-8 lg:p-10 items-start justify-center space-y-6 rounded-3xl bg-white/5 border border-[#F8898F]">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl text-[#F2676E] font-extrabold">
+          About Me
+        </h1>
+
+        <p className="text-base sm:text-lg md:text-xl font-medium leading-relaxed">
           I started my journey as a Civil Engineering diploma graduate, but my
-          curiosity for technology led me into software development.I'm now
+          curiosity for technology led me into software development. I'm now
           focused on building full-stack applications using the MERN stack.
         </p>
-        <p className="text-[22px] font-medium">
+
+        <p className="text-base sm:text-lg md:text-xl font-medium leading-relaxed">
           I enjoy solving real-world problems with code, and constantly learning
           and experimenting with new technologies.
         </p>
-        {/* image */}
-        <div className="absolute right-10 top-54">
-          <img className="w-[200px] " src={deadpoolsit} alt="" />
+
+        {/* Decorative image - hidden on small screens */}
+        <div className="hidden lg:block absolute right-10 top-20">
+          <img
+            className="w-[150px] md:w-[200px]"
+            src={deadpoolsit}
+            alt="Deadpool sitting"
+          />
         </div>
 
-        {/* Experience */}
-        <div className="w-[100%] relative mt-20 overflow-hidden min-h-[300px] flex flex-col px-7 py-7 items-start space-y-6 rounded-3xl bg-white/5 border border-[#F8898F] ">
-          <h1 className="text-3xl text-[#F2676E] font-extrabold">Experience</h1>
+        {/* Experience box */}
+        <div className="w-full relative mt-12 md:mt-20 overflow-hidden min-h-[250px] flex flex-col px-6 sm:px-8 md:px-10 py-6 sm:py-8 items-start space-y-6 rounded-3xl bg-white/5 border border-[#F8898F]">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl text-[#F2676E] font-extrabold">
+            Experience
+          </h1>
           <Timeline />
         </div>
       </div>

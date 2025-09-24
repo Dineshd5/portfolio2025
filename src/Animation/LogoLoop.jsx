@@ -29,10 +29,7 @@ const useResizeObserver = (callback, elements, dependencies) => {
 
     callback();
 
-    return () => {
-      observers.forEach((observer) => observer?.disconnect());
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => observers.forEach((observer) => observer?.disconnect());
   }, dependencies);
 };
 
@@ -48,18 +45,15 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
     let remainingImages = images.length;
     const handleImageLoad = () => {
       remainingImages -= 1;
-      if (remainingImages === 0) {
-        onLoad();
-      }
+      if (remainingImages === 0) onLoad();
     };
 
     images.forEach((img) => {
-      const htmlImg = img;
-      if (htmlImg.complete) {
+      if (img.complete) {
         handleImageLoad();
       } else {
-        htmlImg.addEventListener("load", handleImageLoad, { once: true });
-        htmlImg.addEventListener("error", handleImageLoad, { once: true });
+        img.addEventListener("load", handleImageLoad, { once: true });
+        img.addEventListener("error", handleImageLoad, { once: true });
       }
     });
 
@@ -69,7 +63,6 @@ const useImageLoader = (seqRef, onLoad, dependencies) => {
         img.removeEventListener("error", handleImageLoad);
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 };
 
@@ -102,9 +95,7 @@ const useAnimationLoop = (
 
     if (prefersReduced) {
       track.style.transform = "translate3d(0, 0, 0)";
-      return () => {
-        lastTimestampRef.current = null;
-      };
+      return () => (lastTimestampRef.current = null);
     }
 
     const animate = (timestamp) => {
@@ -127,8 +118,7 @@ const useAnimationLoop = (
         nextOffset = ((nextOffset % seqWidth) + seqWidth) % seqWidth;
         offsetRef.current = nextOffset;
 
-        const translateX = -offsetRef.current;
-        track.style.transform = `translate3d(${translateX}px, 0, 0)`;
+        track.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
       }
 
       rafRef.current = requestAnimationFrame(animate);
@@ -137,16 +127,13 @@ const useAnimationLoop = (
     rafRef.current = requestAnimationFrame(animate);
 
     return () => {
-      if (rafRef.current !== null) {
-        cancelAnimationFrame(rafRef.current);
-        rafRef.current = null;
-      }
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
       lastTimestampRef.current = null;
     };
   }, [targetVelocity, seqWidth, isHovered, pauseOnHover, trackRef]);
 };
 
-export const LogoLoop = memo(
+const LogoLoop = memo(
   ({
     logos,
     speed = 120,
@@ -196,9 +183,7 @@ export const LogoLoop = memo(
       [containerRef, seqRef],
       [logos, gap, logoHeight]
     );
-
     useImageLoader(seqRef, updateDimensions, [logos, gap, logoHeight]);
-
     useAnimationLoop(
       trackRef,
       targetVelocity,
@@ -220,10 +205,6 @@ export const LogoLoop = memo(
       () =>
         cx(
           "relative overflow-x-hidden group",
-          "[--logoloop-gap:32px]",
-          "[--logoloop-logoHeight:28px]",
-          "[--logoloop-fadeColorAuto:#ffffff]",
-          "dark:[--logoloop-fadeColorAuto:#0b0b0b]",
           scaleOnHover && "py-[calc(var(--logoloop-logoHeight)*0.1)]",
           className
         ),
@@ -245,8 +226,7 @@ export const LogoLoop = memo(
         const content = isNodeItem ? (
           <span
             className={cx(
-              "inline-flex items-center",
-              "motion-reduce:transition-none",
+              "inline-flex items-center motion-reduce:transition-none",
               scaleOnHover &&
                 "transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120"
             )}
@@ -257,18 +237,11 @@ export const LogoLoop = memo(
         ) : (
           <img
             className={cx(
-              "h-[var(--logoloop-logoHeight)] w-auto block object-contain",
-              "[-webkit-user-drag:none] pointer-events-none",
-              "[image-rendering:-webkit-optimize-contrast]",
-              "motion-reduce:transition-none",
+              "sm:h-[var(--logoloop-logoHeight)] h-[25px] w-auto block object-contain [-webkit-user-drag:none] pointer-events-none ",
               scaleOnHover &&
                 "transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120"
             )}
             src={item.src}
-            srcSet={item.srcSet}
-            sizes={item.sizes}
-            width={item.width}
-            height={item.height}
             alt={item.alt ?? ""}
             title={item.title}
             loading="lazy"
@@ -281,36 +254,33 @@ export const LogoLoop = memo(
           ? item.ariaLabel ?? item.title
           : item.alt ?? item.title;
 
-        const inner = item.href ? (
-          <a
-            className={cx(
-              "inline-flex items-center no-underline rounded",
-              "transition-opacity duration-200 ease-linear",
-              "hover:opacity-80",
-              "focus-visible:outline focus-visible:outline-current focus-visible:outline-offset-2"
-            )}
-            href={item.href}
-            aria-label={itemAriaLabel || "logo link"}
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            {content}
-          </a>
-        ) : (
-          content
-        );
-
         return (
           <li
             className={cx(
-              "flex-none w-[60px] h-[60px] flex justify-center items-center bg-white/20 rounded-[16px]", //adjust height here
+              "flex-none flex justify-center items-center bg-white/20 rounded-[16px]",
               scaleOnHover && "overflow-visible group/item"
             )}
-            style={{ marginRight: "17px" }}
+            style={{
+              width: "clamp(40px, 10vw, 60px)",
+              height: "clamp(40px, 10vw, 60px)",
+              marginRight: "clamp(8px, 2vw, 17px)",
+            }}
             key={key}
             role="listitem"
           >
-            {inner}
+            {item.href ? (
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label={itemAriaLabel || "logo link"}
+                className="inline-flex items-center no-underline rounded transition-opacity duration-200 ease-linear hover:opacity-80"
+              >
+                {content}
+              </a>
+            ) : (
+              content
+            )}
           </li>
         );
       },
@@ -347,10 +317,7 @@ export const LogoLoop = memo(
     return (
       <div
         ref={containerRef}
-        className={cx(
-          rootClasses,
-          "bg-white/20 rounded-[16px] p-4 z-5 mx-5" // <-- white with 20% opacity & border-radius 16px
-        )}
+        className={cx(rootClasses, "bg-white/20 z-5 p-4 sm:p-6   mx-auto")}
         style={containerStyle}
         role="region"
         aria-label={ariaLabel}
@@ -361,28 +328,16 @@ export const LogoLoop = memo(
           <>
             <div
               aria-hidden
-              className={cx(
-                "pointer-events-none absolute inset-y-0 left-0 z-[1]",
-                "w-[clamp(24px,8%,120px)]",
-                "bg-[linear-gradient(to_right,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]"
-              )}
+              className="pointer-events-none absolute inset-y-0 left-0 z-[1] w-[clamp(24px,8%,120px)] bg-[linear-gradient(to_right,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]"
             />
             <div
               aria-hidden
-              className={cx(
-                "pointer-events-none absolute inset-y-0 right-0 z-[1]",
-                "w-[clamp(24px,8%,120px)]",
-                "bg-[linear-gradient(to_left,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]"
-              )}
+              className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-[clamp(24px,8%,120px)] bg-[linear-gradient(to_left,var(--logoloop-fadeColor,var(--logoloop-fadeColorAuto))_0%,rgba(0,0,0,0)_100%)]"
             />
           </>
         )}
-
         <div
-          className={cx(
-            "flex w-max will-change-transform select-none",
-            "motion-reduce:transform-none"
-          )}
+          className="flex w-max will-change-transform select-none motion-reduce:transform-none"
           ref={trackRef}
         >
           {logoLists}

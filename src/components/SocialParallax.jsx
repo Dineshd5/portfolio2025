@@ -30,12 +30,11 @@ const SocialParallax = () => {
 
       for (let item of items) {
         const itemRect = item.getBoundingClientRect();
-        // Calculate horizontal offset based on container center
         const offset =
           containerRect.left +
           containerRect.width / 2 -
           (itemRect.left + itemRect.width / 2);
-        // Apply transform for parallax effect
+
         item.style.transform = `translateY(${offset * 0.05}px) scale(${
           1 + Math.abs(offset * 0.001)
         })`;
@@ -43,7 +42,7 @@ const SocialParallax = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // initial call
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -53,7 +52,7 @@ const SocialParallax = () => {
       className="w-full overflow-x-auto py-6 flex justify-center"
       ref={containerRef}
     >
-      <div className="flex gap-10 px-4">
+      <div className="flex gap-6 sm:gap-10 px-4">
         {socialLinks.map((social, index) => (
           <a
             key={index}
@@ -65,9 +64,9 @@ const SocialParallax = () => {
             <img
               src={social.image}
               alt={social.name}
-              className="w-16 h-16 object-cover rounded-full"
+              className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-full"
             />
-            <span className="text-sm text-black">{social.name}</span>
+            <span className="text-xs sm:text-sm text-black">{social.name}</span>
           </a>
         ))}
       </div>

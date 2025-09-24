@@ -6,21 +6,32 @@ import { Swiper, SwiperSlide } from "swiper/react";
 const ProjectCarousel = ({ projects }) => (
   <Swiper
     modules={[Autoplay]}
-    spaceBetween={30}
-    slidesPerView={3}
+    spaceBetween={20}
     loop={true}
     autoplay={{ delay: 2500, disableOnInteraction: false }}
+    breakpoints={{
+      320: { slidesPerView: 1 }, // 📱 mobile
+      640: { slidesPerView: 2 }, // 📱 landscape / small tablets
+      1024: { slidesPerView: 3 }, // 💻 laptops
+    }}
   >
     {projects.map((project, i) => (
       <SwiperSlide key={i}>
-        <div className="bg-white p-4 rounded shadow text-black h-[300px] flex flex-col relative group overflow-hidden">
+        <div className="bg-white p-4 rounded shadow text-black h-[320px] flex flex-col relative group overflow-hidden">
+          {/* Thumbnail */}
           <img
             src={project.image}
             alt={project.title}
-            className="w-full h-48 object-cover rounded"
+            className="w-full h-44 object-cover rounded"
           />
-          <h3 className="mt-2 font-bold">{project.title}</h3>
-          <p className="text-sm line-clamp-3">{project.description}</p>
+
+          {/* Title + description */}
+          <h3 className="mt-2 font-bold text-base sm:text-lg">
+            {project.title}
+          </h3>
+          <p className="text-sm sm:text-base line-clamp-3">
+            {project.description}
+          </p>
 
           {/* Hover overlay */}
           <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 rounded">

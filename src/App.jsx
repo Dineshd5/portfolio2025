@@ -10,29 +10,33 @@ import Navbar from "./components/Navbar";
 import Footer from "./pages/Footer.jsx";
 const App = () => {
   return (
-    <div className=" relative z-0 font-[ruda] w-screen bg-black text-white h-vh">
+    <div className="relative z-0 font-[ruda] bg-black text-white min-h-screen w-full overflow-x-hidden">
       <Navbar />
-      <Hero />
-      {/* Decorative Blurs */}
-      <CircleBlur left="500px" top="100px" />
-      <ArcBlur top="50px" left="50px" />
-      <CircleBlur left="500px" top="100px" />
-      <About />
-      <CircleBlur left="10px" top="1000px" />
-      <LogoLoop
-        logos={skill_Logos}
-        speed={100} // adjust speed
-        direction="left"
-        logoHeight={50}
-        gap={40}
-        pauseOnHover={true}
-        fadeOut={true}
-        scaleOnHover={true}
-        className="my-16"
-      />
-      <CircleBlur right="50px" top="2200px" />
-      <Projects />
-      <Contact />
+      <main className="relative z-0">
+        <Hero />
+
+        {/* Decorative Blurs */}
+        <CircleBlur left="50%" top="10%" className="hidden md:block" />
+        <ArcBlur top="5%" left="5%" className="hidden lg:block" />
+        <About />
+        <CircleBlur left="2%" top="1000px" className="hidden md:block" />
+
+        <LogoLoop
+          logos={skill_Logos}
+          speed={100}
+          direction="left"
+          logoHeight={50}
+          gap={40}
+          pauseOnHover
+          fadeOut
+          scaleOnHover
+          className="my-16 md:my-24"
+        />
+
+        <CircleBlur right="5%" top="2200px" className="hidden md:block" />
+        <Projects />
+        <Contact />
+      </main>
       <Footer />
     </div>
   );

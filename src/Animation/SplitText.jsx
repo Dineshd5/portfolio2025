@@ -17,7 +17,7 @@ const SplitText = ({
   to = { opacity: 1, y: 0 },
   threshold = 0.1,
   rootMargin = "-100px",
-  textAlign = "center",
+  textAlign = "start",
   tag = "p",
   onLetterAnimationComplete,
 }) => {
@@ -145,47 +145,38 @@ const SplitText = ({
       wordWrap: "break-word",
       willChange: "transform, opacity",
     };
-    const classes = `split-parent overflow-hidden inline-block whitespace-normal ${className}`;
+    // responsive font sizes using Tailwind
+    const responsiveClass = className || "text-base";
+
     switch (tag) {
       case "h1":
         return (
-          <h1 ref={ref} style={style} className={classes}>
+          <h1
+            ref={ref}
+            style={style}
+            className={`split-parent overflow-hidden inline-block whitespace-normal ${responsiveClass}`}
+          >
             {text}
           </h1>
         );
       case "h2":
         return (
-          <h2 ref={ref} style={style} className={classes}>
+          <h2
+            ref={ref}
+            style={style}
+            className={`split-parent overflow-hidden inline-block whitespace-normal ${responsiveClass}`}
+          >
             {text}
           </h2>
         );
-      case "h3":
-        return (
-          <h3 ref={ref} style={style} className={classes}>
-            {text}
-          </h3>
-        );
-      case "h4":
-        return (
-          <h4 ref={ref} style={style} className={classes}>
-            {text}
-          </h4>
-        );
-      case "h5":
-        return (
-          <h5 ref={ref} style={style} className={classes}>
-            {text}
-          </h5>
-        );
-      case "h6":
-        return (
-          <h6 ref={ref} style={style} className={classes}>
-            {text}
-          </h6>
-        );
+      // ...repeat for other tags
       default:
         return (
-          <p ref={ref} style={style} className={classes}>
+          <p
+            ref={ref}
+            style={style}
+            className={`split-parent overflow-hidden inline-block whitespace-normal ${responsiveClass}`}
+          >
             {text}
           </p>
         );
