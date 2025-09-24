@@ -7,6 +7,7 @@ import { skill_Logos } from "./assets/assets.js";
 import ArcBlur from "./components/ArcBlur";
 import CircleBlur from "./components/CircleBlur";
 import Navbar from "./components/Navbar";
+import Footer from "./pages/Footer.jsx";
 const App = () => {
   return (
     <div className=" relative z-0 font-[ruda] w-screen bg-black text-white h-vh">
@@ -17,7 +18,7 @@ const App = () => {
       <ArcBlur top="50px" left="50px" />
       <CircleBlur left="500px" top="100px" />
       <About />
-      <CircleBlur left="10px" top="800px" />
+      <CircleBlur left="10px" top="1000px" />
       <LogoLoop
         logos={skill_Logos}
         speed={100} // adjust speed
@@ -29,8 +30,10 @@ const App = () => {
         scaleOnHover={true}
         className="my-16"
       />
+      <CircleBlur right="50px" top="2200px" />
       <Projects />
       <Contact />
+      <Footer />
     </div>
   );
 };

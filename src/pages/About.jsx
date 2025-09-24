@@ -7,7 +7,7 @@ const About = () => {
       className="relative min-h-screen z-5 flex items-center px-[100px]"
     >
       {/* About me */}
-      <div className="w-screen relative overflow-hidden  flex flex-col px-7 py-7 items-start justify-center space-y-6 rounded-3xl bg-white/5 border border-[#F8898F] ">
+      <div className="w-screen relative overflow-hidden  flex flex-col p-7 items-start justify-center space-y-6 rounded-3xl bg-white/5 border border-[#F8898F] ">
         <h1 className="text-3xl text-[#F2676E] font-extrabold">About Me</h1>
         <p className="text-[22px] font-medium">
           I started my journey as a Civil Engineering diploma graduate, but my

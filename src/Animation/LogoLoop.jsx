@@ -349,7 +349,7 @@ export const LogoLoop = memo(
         ref={containerRef}
         className={cx(
           rootClasses,
-          "bg-white/20 rounded-[16px] p-4 mx-5" // <-- white with 20% opacity & border-radius 16px
+          "bg-white/20 rounded-[16px] p-4 z-5 mx-5" // <-- white with 20% opacity & border-radius 16px
         )}
         style={containerStyle}
         role="region"
