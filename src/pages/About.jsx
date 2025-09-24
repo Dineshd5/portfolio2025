@@ -1,4 +1,4 @@
-import Timeline from "../Animation/TimeLine";
+import Timeline from "../Animation/Timeline.jsx";
 import deadpoolsit from "../assets/images/deadpoolsit.png";
 
 const About = () => {
