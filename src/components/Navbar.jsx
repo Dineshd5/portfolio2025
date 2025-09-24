@@ -1,10 +1,29 @@
-import { NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Logo from "../assets/images/Logo.png";
 
 const Navbar = () => {
-  // Active and normal link styles
-  const linkClass = ({ isActive }) =>
-    isActive
+  const [active, setActive] = useState("home");
+
+  // Change active state based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["home", "about", "projects", "contact"];
+      let current = "home";
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && window.scrollY + window.innerHeight / 2 >= el.offsetTop) {
+          current = id;
+        }
+      }
+      setActive(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const linkClass = (name) =>
+    active === name
       ? "text-[#ff9098] border-b-2 border-[#ff9098] pb-1 transition-all duration-300"
       : "text-white hover:text-[#bb9295] transition-all duration-300";
 
@@ -17,18 +36,18 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div className="flex gap-[80px] text-[20px] px-5 py-2 rounded-xl bg-[rgb(255,255,255,10%)] border-2 border-transparent">
-        <NavLink to="/" className={linkClass}>
+        <a href="#home" className={linkClass("home")}>
           Home
-        </NavLink>
-        <NavLink to="/about" className={linkClass}>
+        </a>
+        <a href="#about" className={linkClass("about")}>
           About
-        </NavLink>
-        <NavLink to="/projects" className={linkClass}>
+        </a>
+        <a href="#projects" className={linkClass("projects")}>
           Projects
-        </NavLink>
-        <NavLink to="/contact" className={linkClass}>
+        </a>
+        <a href="#contact" className={linkClass("contact")}>
           Contact
-        </NavLink>
+        </a>
       </div>
 
       {/* Button */}

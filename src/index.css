@@ -1,5 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Ruda:wght@400..900&display=swap");
 @import "tailwindcss";
 
+/* Hide scrollbar but keep scrolling */
+html,
 body {
-  overflow: hidden;
+  -ms-overflow-style: none; /* IE and old Edge */
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+}
+
+/* Chrome, Safari, Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+
+.ruda {
+  font-family: "Ruda", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }

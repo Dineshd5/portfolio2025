@@ -2,20 +2,17 @@ import { useState } from "react";
 import SplitText from "../Animation/SplitText";
 import deadpool1 from "../assets/images/deadpool1.png";
 import deadpool2 from "../assets/images/deadpool2.png";
-import ArcBlur from "../components/ArcBlur";
-import CircleBlur from "../components/CircleBlur";
 
 const Hero = () => {
   const [hovered, setHovered] = useState(false); // state for hover
 
   return (
-    <section className="relative min-h-screen bg-black flex items-center  mx-[100px]">
-      {/* Decorative Blurs */}
-      <CircleBlur left="500px" top="100px" />
-      <ArcBlur top="50px" left="50px" />
-
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center z-5 px-[100px]"
+    >
       {/* Content */}
-      <div className="relative z-10 flex-1 flex-col items-start justify-center  ">
+      <div className="relative flex-1 flex-col items-start justify-center  ">
         {/* Greeting */}
         <SplitText
           text="Hi, I'm Dinesh."
