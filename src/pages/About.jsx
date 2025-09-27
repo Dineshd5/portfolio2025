@@ -25,7 +25,7 @@ const About = () => {
         </p>
 
         {/* Decorative image - hidden on small screens */}
-        <div className="hidden lg:block absolute right-10 top-20">
+        <div className="hidden lg:block absolute right-15 top-58">
           <img
             className="w-[150px] md:w-[200px]"
             src={deadpoolsit}
